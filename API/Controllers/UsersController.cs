@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Controllers
-{
-    [Route("api/[controller]")] // /api/users
-    [ApiController]
-    public class UsersController(DataContext context) : ControllerBase
+namespace API.Controllers;
+//{
+//    [Route("api/[controller]")] // /api/users
+//    [ApiController]
+    public class UsersController(DataContext context) : BaseApiController
     {
 
         [HttpGet]
@@ -34,4 +34,4 @@ namespace API.Controllers
 
         }
     }
-}
+
