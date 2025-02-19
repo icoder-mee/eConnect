@@ -30,8 +30,8 @@
 
     @if (!accountService.currentUser()) {
       <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex">
-        <input name="username" [(ngModel)]="model.username" class="form-control me-2" placeholder="Username">
-        <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password">
+        <input name="username" [(ngModel)]="model.username" class="form-control me-2 rounded" placeholder="Username">
+        <input name="password" [(ngModel)]="model.password" class="form-control me-2 rounded" type="password" placeholder="Password">
         <button class="btn btn-outline-success" type="submit">Login</button>
       </form>
     }
