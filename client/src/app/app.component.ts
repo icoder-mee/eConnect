@@ -1,5 +1,4 @@
-import { NgFor } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavComponent } from "./nav/nav.component";
@@ -15,13 +14,9 @@ import { HomeComponent } from "./home/home.component";
   imports: [NavComponent, HomeComponent]
 })
 export class AppComponent implements OnInit {
-  http = inject(HttpClient);
   private accountService = inject(AccountService);
-  title = 'E-Connect';
-  users: any;
 
   ngOnInit() {
-    this.getUsers();
     this.setCurrentUser();
   }
 
@@ -34,12 +29,6 @@ export class AppComponent implements OnInit {
     this.accountService.currentUser.set(user)
   }
 
-  getUsers() {
-    this.http.get('https://localhost:7283/api/users').subscribe({
-      next: (response) => {this.users = response},
-      error: (error) => {console.log(error);},
-      complete: () => {console.log("Request has completed");}
-    })
-  }
+
 
 }
