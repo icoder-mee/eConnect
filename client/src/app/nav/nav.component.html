@@ -2,7 +2,7 @@
   <div class="container">
     <a class="navbar-brand" href="#">E-Connect</a>
 
-    @if (loggedIn) {
+    @if (accountService.currentUser()) {
 
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
@@ -16,9 +16,9 @@
         </li>
       </ul>
     }
-    @if (loggedIn) {
+    @if (accountService.currentUser()) {
       <div dropdown class="dropdown">
-        <a dropdownToggle class="dropdown-toggle text-light text-decoration-none">Welcome, {{model.username}}</a>
+        <a dropdownToggle class="dropdown-toggle text-light text-decoration-none">Welcome, {{accountService.currentUser()?.username}}</a>
         <div *dropdownMenu class="dropdown-menu">
           <a class="dropdown-item">Edit Profile</a>
           <div class="dropdown-divider"></div>
@@ -27,7 +27,7 @@
       </div>
     }
 
-    @if (!loggedIn) {
+    @if (!accountService.currentUser()) {
       <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex">
         <input name="username" [(ngModel)]="model.username" class="form-control me-2" placeholder="Username">
         <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password">
