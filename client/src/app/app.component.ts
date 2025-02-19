@@ -8,10 +8,9 @@ import { HomeComponent } from "./home/home.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  // imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [NavComponent, HomeComponent]
+  imports: [RouterOutlet, NavComponent, HomeComponent]
 })
 export class AppComponent implements OnInit {
   private accountService = inject(AccountService);
