@@ -1,19 +1,21 @@
 import { Component, EventEmitter, inject, input, Input, OnInit, output, Output } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgIf } from '@angular/common';
+import { TextInputComponent } from "../_forms/text-input/text-input.component";
 
 @Component({
   selector: 'app-register',
   // imports: [FormsModule],
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [ReactiveFormsModule, JsonPipe, NgIf, TextInputComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
   private accountService = inject(AccountService);
   private toastr = inject(ToastrService);
+  private fb = inject(FormBuilder);
 
   // @Input() userFromHomeComponent: any;
   // userFromHomeComponent = input.required<any>()
@@ -30,8 +32,17 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(8)]),
-      confirmPassword: new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(8)]),
+      confirmPassword: new FormControl('',[Validators.required, this.matchValues('password')]),
+    });
+    this.registerForm.controls['password'].valueChanges.subscribe({
+      next: () => this.registerForm.controls['confirmPassword'].updateValueAndValidity()
     })
+  }
+
+  matchValues(matchTo: string): ValidatorFn {
+    return (control: AbstractControl) => {
+      return control.value === control.parent?.get(matchTo)?.value ? null : {isMatching: true}
+    }
   }
 
   register() {
