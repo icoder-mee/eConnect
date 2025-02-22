@@ -20,7 +20,8 @@
   [label]="'Known as'">
   </app-text-input>
 
-  <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])"
+  <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])" [maxDate]="maxDate"
+  [label]="'Date Of Birth'"
   >
   </app-date-picker>
 
