@@ -11,5 +11,10 @@
             get => _pageSize;
             set => _pageSize = (value > MaxPageSize) ? MaxPageSize: value;
         }
+
+        public string? Gender { get; set; }
+        public string? CurrentUsername { get; set; }
     }
+
+    
 }
