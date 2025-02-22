@@ -22,6 +22,8 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
     {
         var users = await userRepository.GetMemberAsync();
+
+
         return Ok(users);
     }
 
