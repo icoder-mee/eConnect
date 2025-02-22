@@ -3,13 +3,14 @@ import { MembersService } from '../../_services/members.service';
 import { Member } from '../../_models/member';
 import { MemberCardComponent } from "../member-card/member-card.component";
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AccountService } from '../../_services/account.service';
 import { UserParams } from '../../_models/userParams';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-member-list',
-  imports: [MemberCardComponent, PaginationModule, FormsModule],
+  imports: [MemberCardComponent, PaginationModule, FormsModule, ButtonsModule],
   templateUrl: './member-list.component.html',
   styleUrl: './member-list.component.css'
 })
