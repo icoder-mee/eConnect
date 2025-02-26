@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { DatePipe } from '@angular/common';
 import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
+import { TimeagoModule } from 'ngx-timeago';
 // import { TimeagoModule } from 'ngx-timeago';
 
 @Component({
@@ -15,7 +16,7 @@ import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
     standalone: true,
     templateUrl: './member-edit.component.html',
     styleUrl: './member-edit.component.css',
-    imports: [TabsModule, FormsModule, DatePipe, PhotoEditorComponent]
+    imports: [TabsModule, FormsModule, DatePipe, PhotoEditorComponent, TimeagoModule]
 })
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm?: NgForm;
