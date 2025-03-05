@@ -18,6 +18,8 @@ export const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [authGuard],
     children: [
+      // This route directs to the MemberListComponent.
+      // The canActivate guard (authGuard) ensures that only authenticated users can access this route.
       // {path: 'members', component: MemberListComponent, canActivate: [authGuard]},
       {path: 'members', component: MemberListComponent},
       {path: 'members/:username', component: MemberDetailComponent},
