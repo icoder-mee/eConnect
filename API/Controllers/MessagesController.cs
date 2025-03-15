@@ -1,6 +1,7 @@
 ﻿using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -39,18 +40,18 @@ namespace API.Controllers
             return BadRequest("Failed to save message");
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser(
-        //    [FromQuery] MessageParams messageParams)
-        //{
-        //    messageParams.Username = User.GetUsername();
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser(
+            [FromQuery] MessageParams messageParams)
+        {
+            messageParams.Username = User.GetUsername();
 
-        //    var messages = await unitOfWork.MessageRepository.GetMessagesForUser(messageParams);
+            var messages = await messageRepository.GetMessagesForUser(messageParams);
 
-        //    Response.AddPaginationHeader(messages);
+            Response.AddPaginationHeader(messages);
 
-        //    return messages;
-        //}
+            return messages;
+        }
 
         //[HttpGet("thread/{username}")]
         //public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
