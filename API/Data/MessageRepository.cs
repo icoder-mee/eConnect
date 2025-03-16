@@ -18,7 +18,6 @@ namespace API.Data
         public void DeleteMessage(Message message)
         {
             context.Messages.Remove(message);
-
         }
 
         public async Task<Message?> GetMessage(int id)
@@ -33,9 +32,9 @@ namespace API.Data
                 .AsQueryable();
             query = messageParams.Container switch
             {
-                "Inbox" => query.Where(x=>x.Recipient.UserName == messageParams.Username),
-                "Outbox" => query.Where(x=>x.Sender.UserName == messageParams.Username),
-                _ => query.Where(x=>x.Recipient.UserName == messageParams.Username && x.DateRead == null),
+                "Inbox" => query.Where(x=>x.Recipient.UserName == messageParams.Username && x.RecipientDeleted == false),
+                "Outbox" => query.Where(x=>x.Sender.UserName == messageParams.Username && x.SenderDeleted == false),
+                _ => query.Where(x=>x.Recipient.UserName == messageParams.Username && x.DateRead == null && x.RecipientDeleted == false),
             };
 
             var messages = query.ProjectTo<MessageDto>(mapper.ConfigurationProvider);

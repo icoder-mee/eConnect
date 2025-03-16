@@ -27,6 +27,7 @@ export class MessagesComponent implements OnInit {
   loadMessages() {
     this.messageService.getMessages(this.pageNumber, this.pageSize, this.container)
   }
+
   deleteMessage(id: number) {
     this.messageService.deleteMessage(id).subscribe({
       next: _ => {
