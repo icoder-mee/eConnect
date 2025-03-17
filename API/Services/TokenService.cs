@@ -15,6 +15,9 @@ namespace API.Services
             if (tokenKey.Length < 64) throw new Exception("Token Key must be longer");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
 
+            if (user.UserName == null) throw new Exception("No Username for user");
+            
+
             var claims = new List<Claim>
             {
                 new(ClaimTypes.NameIdentifier, user.Id.ToString()),
