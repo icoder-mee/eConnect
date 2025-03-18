@@ -23,30 +23,29 @@ export class UserManagementComponent implements OnInit {
 
   }
 
-  openRolesModal() {
+  openRolesModal(user: User) {
     const initialState: ModalOptions = {
       class: 'modal-lg',
       initialState: {
         title: 'User roles',
-        list: ['Admin','Moderator','Member']
-        // username: user.userName,
-        // selectedRoles: [...user.roles],
-        // availableRoles: ['Admin', 'Moderator', 'Member'],
-        // users: this.users,
-        // rolesUpdated: false
+        username: user.userName,
+        selectedRoles: [...(user.roles ?? [])],
+        availableRoles: ['Admin', 'Moderator', 'Member'],
+        users: this.users,
+        rolesUpdated: false
       }
     }
     this.bsModalRef = this.modalService.show(RolesModalComponent, initialState);
-    // this.bsModalRef.onHide?.subscribe({
-    //   next: () => {
-    //     if (this.bsModalRef.content && this.bsModalRef.content.rolesUpdated) {
-    //       const selectedRoles = this.bsModalRef.content.selectedRoles;
-    //       this.adminService.updateUserRoles(user.userName, selectedRoles).subscribe({
-    //         next: roles => user.roles = roles
-    //       })
-    //     }
-    //   }
-    // })
+    this.bsModalRef.onHide?.subscribe({
+      next: () => {
+        if (this.bsModalRef.content && this.bsModalRef.content.rolesUpdated) {
+          const selectedRoles = this.bsModalRef.content.selectedRoles;
+          this.adminService.updateUserRoles(user.userName, selectedRoles).subscribe({
+            next: roles => user.roles = roles
+          })
+        }
+      }
+    })
   }
 
   // getUsersWithRoles() {
