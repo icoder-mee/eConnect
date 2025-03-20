@@ -38,10 +38,22 @@ export class MemberEditComponent implements OnInit {
   loadMember() {
     const user = this.accountService.currentUser();
     if (!user) return;
-    this.memberService.getMember(user.userName).subscribe({
+    this.memberService.getMember(user.username).subscribe({
       next: member => this.member = member
     })
   }
+  // loadMember() {
+  //   const user = this.accountService.currentUser();
+  //   if (!user || !user.username) {
+  //     console.error('User is undefined or has no username');
+  //     return;
+  //   }
+  //   this.memberService.getMember(user.username).subscribe({
+  //     next: member => this.member = member,
+  //     error: err => console.error('Failed to load member:', err)
+  //   });
+  // }
+
 
   updateMember() {
     this.memberService.updateMember(this.editForm?.value).subscribe({
